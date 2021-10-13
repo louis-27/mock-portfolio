@@ -2,6 +2,16 @@
   "name": "mock-portfolio",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "postinstall": "npx husky install",
+    "pre-commit": "lint-staged",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore ."
+  },
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,11 +23,17 @@
     "react-scroll": "^1.8.4",
     "web-vitals": "^1.0.1"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "autoprefixer": "^9",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "postcss": "^7",
+    "prettier": "^2.4.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
   },
   "eslintConfig": {
     "extends": [
@@ -37,9 +53,10 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run format",
+      "npm run lint"
+    ]
   }
 }
